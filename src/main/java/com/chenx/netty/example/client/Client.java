@@ -10,6 +10,7 @@ import com.chenx.netty.example.util.IdUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
@@ -24,6 +25,7 @@ public class Client {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.channel(NioSocketChannel.class)  //1.设置IO模式
                 .group(new NioEventLoopGroup()) //2.设置reactor方式
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 10*1000)//设置连接超时时间
                 .handler(new ChannelInitializer<NioSocketChannel>() {
                     @Override
                     protected void initChannel(NioSocketChannel ch) throws Exception {
@@ -38,6 +40,7 @@ public class Client {
                 });
         //1.连接到服务端
         ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 8090);
+        //2.保证已经连接上
         channelFuture.sync();
         //2.把数据发送到服务端
         RequestMessage requestMessage = new RequestMessage(IdUtil.nextId(), new OrderOperation(1001, "tudou"));

@@ -32,6 +32,7 @@ public class ClientV1 {
                         pipeline.addLast(new OrderFrameEncoder());
                         pipeline.addLast(new OrderProtocolEncoder());
                         pipeline.addLast(new OrderProtocolDecoder());
+
                         //第一级的codec,所以放在最小面。//对比Client区别
                         pipeline.addLast(new OperationToRequestMessageEncoder());
 

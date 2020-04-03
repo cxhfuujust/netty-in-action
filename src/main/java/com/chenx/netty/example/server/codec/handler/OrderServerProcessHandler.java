@@ -4,12 +4,14 @@ import com.chenx.netty.example.common.Operation;
 import com.chenx.netty.example.common.OperationResult;
 import com.chenx.netty.example.common.RequestMessage;
 import com.chenx.netty.example.common.ResponseMessage;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * SimpleChannelInboundHandler 相对于 ChannelInboundHandlerAdapter 的好处是帮我们释放了ByteBuf
  */
+@ChannelHandler.Sharable
 public class OrderServerProcessHandler extends SimpleChannelInboundHandler<RequestMessage> {
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RequestMessage requestMessage) throws Exception {

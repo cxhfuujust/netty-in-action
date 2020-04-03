@@ -7,6 +7,9 @@ import io.netty.handler.codec.MessageToMessageDecoder;
 
 import java.util.List;
 
+/**
+ * 2.***ProtocolDecoder：解出了ByteBuf之后，为了给业务层做处理，还需要第二层的decode，把 ByteBuf 转换成 业务对象。
+ */
 public class OrderProtocolDecoder extends MessageToMessageDecoder<ByteBuf> {
 
     /**
